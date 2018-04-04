@@ -1,35 +1,41 @@
 callable-pip
 ============
 
-``callable-pip`` patches over the wide use of ``pip.main()``
+``callable-pip`` provides a drop-in replacement for ``pip.main()`` and support
+for monkey-patching ``pip.main`` via a known-dangerous method.
 
 ``pip.main()`` has never been a publicly supported API for ``pip``, but it has
-often been used as such.
+often been used as such. This tiny package is meant to cover the gap and ease
+people's transitions to new usage.
 
-``callable-pip`` provides two public methods:
+Drop-in Replacement for pip.main
+--------------------------------
 
-A drop-in replacement for ``pip.main()``::
+This usage is *always guaranteed to work* on any supported python version with
+any functioning version of ``pip``.
+
+Instead of ``pip.main(...)``, use this method instead::
 
     import callable_pip
-    callable_pip.main()
+    callable_pip.main('install', '--upgrade', 'setuptools')
 
-A patch which adds ``pip.main()`` back to ``pip``, but which is dangerous and
-known not to work on versions of ``pip`` which are not importable::
+If you are writing a python program, you can just use ``callable_pip.main()``
+yourself. This is the only guaranteed-safe usage.
+
+Patching pip.main
+-----------------
+
+``callable-pip`` provides a patch which adds ``pip.main()`` back to ``pip``,
+but which is dangerous and known not to work on some versions of ``pip``::
 
     import callable_pip
     callable_pip.dangerous_patch()
     ...
-    pip.main()  # actually invokes callable_pip.main()
-
-
-Usage
------
-
-If you are writing a python program, you can just use ``callable_pip.main()``
-yourself.
+    import pip
+    pip.main('--version')  # actually invokes callable_pip.main()
 
 If you have dependencies which use ``pip.main``, you can call
-``callable_pip.dangerous_patch()`` yourself and it will usually work.
+``callable_pip.dangerous_patch()`` yourself and it will *usually* work.
 
 ``dangerous_patch`` is so-named because it is *not* guaranteed to work on all
 ``pip`` versions and it is dangerous. Avoid it when possible.
@@ -38,7 +44,8 @@ Patching Without Control of Source
 ----------------------------------
 
 You may be a consumer of packages which use ``pip.main()`` in a context where
-you cannot modify or do not own the source. These techniques may help you.
+you cannot modify or do not own any of the source.
+These techniques may help you.
 
 More details on ``sitecustomize.py`` and ``.pth`` files can be found in the
 Python documentation:
@@ -50,9 +57,8 @@ will fail to start.
 Applying the Patch With sitecustomize.py
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``sitecustomize.py`` is a file which is automatically loaded by the python
-interpreter. It can exist anywhere in the ``PYTHONPATH``, including the current
-directory.
+``sitecustomize.py`` can exist anywhere in the ``PYTHONPATH``, including the
+directory where python is invoked.
 
 Add a ``sitecustomize.py`` with the following content, or append it to an
 existing ``sitecustomize.py``::
@@ -64,8 +70,20 @@ Applying the Patch With a .pth File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``.pth`` file can have any name you want, but must be installed in the
-``site-packages`` directory.
+``site-packages`` directory. It may therefore require root or other elevated
+privileges to add.
 
 Add a file, e.g. ``callable_pip.pth``, with the following content::
 
     import callable_pip; callable_pip.dangerous_patch()
+
+Documentation
+=============
+
+All documentation is in this readme doc.
+
+Bug and Issue Reports
+=====================
+
+Submit all bug reports and issues here:
+https://github.com/sirosen/callable-pip/issues

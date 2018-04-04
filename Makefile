@@ -1,6 +1,6 @@
 VIRTUALENV=.venv
 
-.PHONY: build upload localdev test clean help travis
+.PHONY: build upload clean help
 
 help:
 	@echo "These are our make targets and what they do."

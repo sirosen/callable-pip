@@ -2,9 +2,6 @@
 callable_pip setup script
 Supports setuptools or even distutils
 The entire package consists of a single file and is mostly documentation
-
-Starting distribution as "Alpha" to test this out. Hopefully moves to v1.0.0
-and "Production" without any changes.
 """
 
 import os
@@ -20,7 +17,7 @@ LONG_DESCRIPTION = open(
 
 setup(
     name='callable-pip',
-    version='0.1.0',
+    version='1.0.0',
     description='callable-pip patches over the wide use of pip.main()',
     long_description=LONG_DESCRIPTION,
     packages=['callable_pip'],
@@ -28,7 +25,7 @@ setup(
     author_email='sirosen@uchicago.edu',
     url='https://github.com/sirosen/callable-pip',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
