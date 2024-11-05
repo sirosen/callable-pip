@@ -98,7 +98,9 @@ Changelog
 2.0.0
 -----
 
-Update to `pyproject.toml` with `flit-core` for package builds.
+Update to ``pyproject.toml`` with ``flit-core`` for package builds.
+
+Defer import of ``subprocess`` until it is needed.
 
 1.0.0
 -----
