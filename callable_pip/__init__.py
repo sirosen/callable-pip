@@ -4,9 +4,6 @@ appropriately named) which will *try* to patch ``pip.main`` to make it work on
 all versions of ``pip``
 """
 
-import subprocess
-import sys
-
 
 def main(*args):
     """
@@ -19,8 +16,11 @@ def main(*args):
     check_call was added in py2.5 and is supported through py3.x , so it's more
     compatible than some alternatives like subprocess.run (added in py3.5)
     """
+    import subprocess
+    import sys
+
     try:
-        subprocess.check_call([sys.executable, '-m', 'pip'] + list(args))
+        subprocess.check_call([sys.executable, "-m", "pip"] + list(args))
         return 0
     except subprocess.CalledProcessError as err:
         return err.returncode
@@ -39,4 +39,4 @@ def dangerous_patch():
     pip.main = main
 
 
-__all__ = ('dangerous_patch', 'main')
+__all__ = ("dangerous_patch", "main")
