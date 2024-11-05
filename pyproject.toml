@@ -9,11 +9,11 @@ authors = [
     { name = "Stephen Rosen", email = "sirosen0@gmail.com" },
 ]
 description = "callable-pip patches 'pip' to add 'pip.main()'"
-classifiers=[
+classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3.3",
@@ -27,9 +27,8 @@ classifiers=[
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-[project.readme]
-file = "README.rst"
-content-type = "text/x-rst"
+license = { file = "LICENSE" }
+readme = { file = "README.rst", content-type = "text/x-rst" }
 
 [project.urls]
 Homepage = "https://github.com/sirosen/callable-pip"
