@@ -7,4 +7,3 @@ upload:
 
 clean:
 	-rm -r dist
-	-rm -r *.egg-info
