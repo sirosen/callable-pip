@@ -1,6 +1,10 @@
 callable-pip
 ============
 
+.. warning::
+
+    Use at your own risk.
+
 ``callable-pip`` provides a drop-in replacement for ``pip.main()`` and support
 for monkey-patching ``pip.main`` via a known-dangerous method.
 
@@ -87,3 +91,22 @@ Bug and Issue Reports
 
 Submit all bug reports and issues here:
 https://github.com/sirosen/callable-pip/issues
+
+Changelog
+=========
+
+2.0.0
+-----
+
+Update to `pyproject.toml` with `flit-core` for package builds.
+
+1.0.0
+-----
+
+Improved docs, releasing as v1.0 Production after some testing and validation.
+No code changes from v0.1.0
+
+0.1.0
+-----
+
+Initial version
